@@ -1,24 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
+import Counter from './Components/Counter';
+import List from './Components/List';
+
+
 
 function App() {
+
+const [count, setCount] = useState(0);
+const [list, setList] = useState([{id:1, name:'adam'}]);
+
+let handleClick =(operation)=>{
+   console.log(operation);
+   if(operation == 'add'){
+        setCount(prevCount=>{return prevCount+1});
+   }
+   else if(operation == 'sub'){
+        setCount(prevCount => {return prevCount-1});
+   }
+}
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <>
+            <Counter count={count}/>
+            <button onClick={()=>{handleClick('add')}}>Increment</button>
+            <button onClick={()=>{handleClick('sub')}}>Decrement</button>
+
+            <hr/>
+
+            <List list={list}/>
+
+        </>
   );
 }
 
